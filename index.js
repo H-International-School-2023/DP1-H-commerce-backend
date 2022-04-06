@@ -1,55 +1,31 @@
 import express from 'express';
+import fs from 'fs';
 
+;
 const app = express();
 const port = 4000;
 
+app.set('view engine', 'ejs');
+
+const username = 'Andrea'
+const books = [
+  'First',
+  'Second',
+  'Third',
+  'Generic Tolkien Book'
+];
+
 app.get('/', (req, res) => {
-  const page = `
-    <html>
-      <head>
-        <title>
-          Home Page
-        </title>
-      </head>
-      <body>
-        <h1>
-          First Paragraph
-        </h1>
-        <p>
-          This is the first paragraph
-          This is the first paragraph
-          This is the first paragraph
-          This is the first paragraph
-          This is the first paragraph
-          This is the first paragraph
-          This is the first paragraph
-          This is the first paragraph
-          This is the first paragraph
-          This is the first paragraph
-          This is the first paragraph
-        </p>
-        <p>
-          This is the second paragraph
-          This is the second paragraph
-          This is the second paragraph
-          This is the second paragraph
-          This is the second paragraph
-          This is the second paragraph
-          This is the second paragraph
-          This is the second paragraph
-          This is the second paragraph
-          This is the second paragraph
-          This is the second paragraph
-          This is the second paragraph
-          This is the second paragraph
-          This is the second paragraph
-          This is the second paragraph
-        </p>
-      </body>
-    </html>
-  `;
-  res.send(page);
+  res.render('homepage', {
+    username: 'Andrea',
+    books: books,
+  });
 });
+
+app.post('/login', (req, res) => {
+  console.log(req.body);
+  res.send('OK!');
+})
 
 app.get('/hello', (req, res) => {
   res.send('Another endpoint!')
